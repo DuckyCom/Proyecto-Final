@@ -1,0 +1,107 @@
+body{
+    background-color: #eee;
+}
+
+div.a{
+    background-color: white;
+    text-align: center;
+    border: .2px solid #ccc;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 3%;
+    padding-bottom: 4%;
+}
+
+div>input{
+    border-radius: 4%;
+    font-size: 70%;
+    padding: 2%;
+    border-color: #ddd;
+    border-width: .5px;
+    width: 70%;
+}
+
+div>input.user{
+    margin-top: 2%;
+}
+
+button.btn{
+    width: 75%;
+    color: white;
+    font-size: 90%;
+    padding: 1%;
+    border-radius: 10%;
+    border-color: white;
+    background: #99ccfb;
+}
+
+span{
+    color: #888;
+    font-size: 85%;
+    font-style: bold;
+    padding: 3%;
+    font-weight: bolder;
+}
+
+img.w{
+    width: 4%;
+    height: 4%;
+}
+
+span.y{
+    color: #559;
+    font-size: 80%;
+    padding-bottom: 20%;
+}
+
+div.b{
+    background-color: white;
+    text-align: center;
+    border: .2px solid #ccc;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 2%;
+    padding: 3%;
+    font: 95%;
+}
+
+div.b>span{
+    color: #333;
+    font-weight: normal;
+}
+
+div.b.b{
+    color: #0099ff;
+}
+
+div.c{
+    text-align: center;
+    font-size: 83%;
+    color: #333;
+}
+
+img.d{
+    width: 25%;
+    margin-top: 2%;
+}
+
+nav{
+    padding-top: 12%;
+    text-align: center;
+}
+
+nav>a{
+    text-decoration: none;
+    color: #888;
+    font-size: 70%;
+    padding-right: 3%;
+}
+
+footer{
+    text-align: center;
+}
+
+footer>span.e{
+    padding-left: 2%;
+    font-weight: normal;
+}
