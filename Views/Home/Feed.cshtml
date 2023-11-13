@@ -1,9 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
+        .container {
+            display: flex;
+        }
 
-    <div class="header">
-        <!-- Agrega aquí el encabezado con el botón de perfil y otras opciones -->
+        .barra-lateral {
+            width: 20%;
+            background-color: #f2f2f2;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 100vh; /* Ajusta la altura de la barra lateral al 100% del viewport */
+        }
+
+        .contenido-principal {
+            width: 80%;
+            padding: 20px;
+        }
+
+        .publicacion {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .nueva-publicacion {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Barra Lateral -->
+    <div class="barra-lateral">
+      
+        <p>Barra Lateral</p>
     </div>
-    <div class="feed">
-        <!-- Agrega aquí las historias y posts como en Instagram -->
-    </div>
 
+    <!-- Contenido Principal -->
+    <div class="contenido-principal">
+        <!-- Ejemplo de Publicación -->
+        <div class="publicacion">
+            <p><strong>Usuario123:</strong></p>
+            <img src="https://via.placeholder.com/150" alt="Imagen de la publicación" />
+            <p> Contenido de la publicación.</p>
+            <!-- Interacciones y Formulario de Comentarios aquí -->
+        </div>
+
+        <!-- Formulario para agregar una nueva publicación -->
+        <div class="nueva-publicacion">
+            <form action="#" method="post">
+                <input type="text" name="nuevoContenido" placeholder="Escribe algo..." />
+                <input type="text" name="nuevaImagenUrl" placeholder="URL de la imagen (opcional)" />
+                <button type="submit">Compartir</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -2,7 +2,7 @@
 CREATE TABLE Usuarios (
     ID INT IDENTITY(1,1) PRIMARY KEY,
     Nombre VARCHAR(255),
-    Contrase�a VARCHAR(255),
+    Contrase�a VARCHAR(255),
     Mail VARCHAR(255)
 	
 );
@@ -91,7 +91,52 @@ CREATE TABLE Eventos (
     DescripcionEvento TEXT
 );
 
--- Relaci�n entre Eventos y Posts-Eventos
+-- Relaci�n entre Eventos y Posts-Eventos
 ALTER TABLE PostsEventos
 ADD EventoID INT,
 FOREIGN KEY (EventoID) REFERENCES Eventos(ID);
+
+/****** Object:  StoredProcedure [dbo].[LoginUsuario]    Script Date: 6/11/2023 08:50:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[LoginUsuario]
+	(
+		@Nombre nvarchar(500),
+		@Contraseña nvarchar(500)
+	)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT [IdUsuario]
+		,[Nombre]
+		,[Contraseña]
+	FROM [dbo].[Usuarios]
+	WHERE Nombre = @Nombre AND Contraseña = @Contraseña
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RegistrarUsuario]    Script Date: 13/11/2023 08:57:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[RegistrarUsuario]
+	(
+		@Nombre nvarchar(500),
+		@Contraseña nvarchar(500),
+		@Correo nvarchar(500)
+	)
+AS
+BEGIN
+	SET NOCOUNT ON;
+INSERT INTO [dbo].[Usuarios]
+           ([Nombre]
+           ,[Contraseña]
+           ,[Mail])
+     VALUES
+           (@Nombre,
+		   @Contraseña,
+		   @Correo)
+END
+GO
