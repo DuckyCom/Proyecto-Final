@@ -1,6 +1,7 @@
 using System.Data.SqlClient;
 using Dapper;
 using System.Collections.Generic;
+using System.Data;
 
 public class BD{
     private static string _connectionString = @"Server=localhost;DataBase=TP09;Trusted_Connection=True;";
@@ -14,12 +15,14 @@ public class BD{
         return Usuarios;
     }
 
-     public static void RegistrarUsuario(Usuarios Usuario){
-        using(SqlConnection db = new SqlConnection(_connectionString)){
-            string sp = "RegistrarUsuario";
-            db.Execute(sp, new{Nombre = Usuarios.NombreUsuario, Contraseña = Usuarios.Contraseña,
-            Correo = Usuarios.Mail}, commandType: CommandType.StoredProcedure);
-        }
+
+    public static void RegistrarUsuario(Usuarios usuario)
+{
+    using(SqlConnection db = new SqlConnection(_connectionString))
+    {
+        string sp = "RegistrarUsuario";
+        db.Execute(sp, new { Nombre = usuario.NombreUsuario, Contraseña = usuario.Contraseña, Correo = usuario.Mail }, commandType: CommandType.StoredProcedure);
     }
+}
 
 }
