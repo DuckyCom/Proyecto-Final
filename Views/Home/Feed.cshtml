@@ -1,28 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="wwwroot\css\styles.css">
 </head>
 <body class="feed">
-    <div class="header">
-        <div class="profile">
-            <img src="user_pic.jpg" alt="User Pic">
-            <div class="user-info">
-                <span>User Name</span>
-                <span>Location</span>
-            </div>
-        </div>
-        <button>Edit Profile</button>
-    </div>
-    <div class="container">
-        <div class="post">
-            <img src="post_pic.jpg" alt="Post Pic">
-            <div class="post-info">
-                <span>Caption</span>
-                <span>Time</span>
-            </div>
-        </div>
-    </div>
-    <script src="scripts.js"></script>
+ <div class="feed">
+  <div class="post" ng-repeat="post in posts">
+    <img src="{{post.image}}" alt="{{post.title}}">
+    <h3>{{post.title}}</h3>
+    <p>{{post.description}}</p>
+  </div>
+</div>
+<script src="scripts.js"></script>
 </body>
 </html>
