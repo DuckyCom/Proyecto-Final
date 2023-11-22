@@ -1,72 +1,28 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feed</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            display: flex;
-        }
-
-        .barra-lateral {
-            width: 20%;
-            background-color: #f2f2f2;
-            padding: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .contenido-principal {
-            width: 80%;
-            padding: 20px;
-        }
-
-        .publicacion {
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            padding: 10px;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        .nueva-publicacion {
-            margin-top: 20px;   
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body>
-
-<div class="container">
-    <!-- Barra Lateral -->
-    <div class="barra-lateral">
-      
-        <p>Barra Lateral</p>
+<body class="feed">
+    <div class="header">
+        <div class="profile">
+            <img src="user_pic.jpg" alt="User Pic">
+            <div class="user-info">
+                <span>User Name</span>
+                <span>Location</span>
+            </div>
+        </div>
+        <button>Edit Profile</button>
     </div>
-|
-    <!-- Contenido Principal -->
-    <div class="contenido-principal">
-        <!-- Ejemplo de Publicación -->
-        <div class="publicacion">
-            <p><strong>Usuario123:</strong></p>
-            <img src="https://via.placeholder.com/150" alt="Imagen de la publicación" />
-            <p> foto con la bestiiii uuuu</p>
-            <form action="#" method="post">
-                <input type="text" name="Comentario" placeholder="Escribe algo..." />
-                <button type="submit">Compartir</button>
-            </form>
+    <div class="container">
+        <div class="post">
+            <img src="post_pic.jpg" alt="Post Pic">
+            <div class="post-info">
+                <span>Caption</span>
+                <span>Time</span>
+            </div>
         </div>
     </div>
-</div>
-
+    <script src="scripts.js"></script>
 </body>
 </html>
