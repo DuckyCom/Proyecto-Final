@@ -2,7 +2,7 @@
 CREATE TABLE Usuarios (
     ID INT IDENTITY(1,1) PRIMARY KEY,
     Nombre VARCHAR(255),
-    Contrase�a VARCHAR(255),
+    Contrasenia VARCHAR(255),
     Mail VARCHAR(255)
 	
 );
@@ -101,7 +101,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[LoginUsuario]
+CREATE PROCEDURE [dbo].[Login-Usuario]
 	(
 		@Nombre nvarchar(500),
 		@Contraseña nvarchar(500)
@@ -109,11 +109,11 @@ CREATE PROCEDURE [dbo].[LoginUsuario]
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT [IdUsuario]
+	SELECT [ID]
 		,[Nombre]
-		,[Contraseña]
+		,[Contrasenia]
 	FROM [dbo].[Usuarios]
-	WHERE Nombre = @Nombre AND Contraseña = @Contraseña
+	WHERE Nombre = @Nombre AND Contrasenia = @Contraseña
 END
 GO
 /****** Object:  StoredProcedure [dbo].[RegistrarUsuario]    Script Date: 13/11/2023 08:57:12 ******/
@@ -121,7 +121,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[RegistrarUsuario]
+CREATE PROCEDURE [dbo].[Registrar-Usuario]
 	(
 		@Nombre nvarchar(500),
 		@Contraseña nvarchar(500),
@@ -132,7 +132,7 @@ BEGIN
 	SET NOCOUNT ON;
 INSERT INTO [dbo].[Usuarios]
            ([Nombre]
-           ,[Contraseña]
+           ,[Contrasenia]
            ,[Mail])
      VALUES
            (@Nombre,
