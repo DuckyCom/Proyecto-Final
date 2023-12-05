@@ -6,7 +6,7 @@ namespace TPFinal.Models;
 
 public class BD
 {
-    private static string _connectionString = @"Server=localhost;DataBase=DBPetNex;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=DESKTOP-E3OHN6P\SQLEXPRESS01;DataBase=DBPetNex;Trusted_Connection=True;";
 
     public static Usuarios LoginUsuario(string nombreUsuario, string contraseña)
     {
