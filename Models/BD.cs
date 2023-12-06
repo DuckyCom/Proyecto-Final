@@ -6,7 +6,7 @@ namespace TPFinal.Models;
 
 public class BD
 {
-    private static string _connectionString = @"Server=DESKTOP-E3OHN6P\SQLEXPRESS01;DataBase=DBPetNex;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=localhost;DataBase=DBPetNex;Trusted_Connection=True;";
 
     public static Usuarios LoginUsuario(string nombreUsuario, string contraseña)
     {
@@ -15,7 +15,7 @@ public class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sp = "Login-Usuario";
-            usuarios = db.QueryFirstOrDefault<Usuarios>(sp, new { @Nombre = nombreUsuario, @Contraseña = contraseña }, commandType: CommandType.StoredProcedure);
+            usuarios = db.QueryFirstOrDefault<Usuarios>(sp, new { @sp_Nombre = nombreUsuario, @sp_Contraseña = contraseña }, commandType: CommandType.StoredProcedure);
         }
 
         return usuarios;
@@ -35,12 +35,12 @@ public class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sp = "Registrar-Usuario";
-            db.Execute(sp, new { @Nombre = usuario.Nombre, @Contraseña = usuario.Contrasenia, @Correo = usuario.Mail }, commandType: CommandType.StoredProcedure);
+            db.Execute(sp, new { @Nombre = usuario.Nombre, @Contraseña = usuario.Contraseña, @Correo = usuario.Mail }, commandType: CommandType.StoredProcedure);
         }
     }
-    public  static List<PostsFeed> ObtenerFeed()
+    public static List<PostsFeed> ObtenerFeed()
     {
-        string sp = "Select * From PostsFeed";
+        string sp = "select P.ID, P.UsuarioID, P.Imagen, P.Descripcion, P.ContadorLikes, U.Nombre from PostsFeed P inner join Usuarios U ON P.UsuarioID = U.ID";
         using (SqlConnection db = new SqlConnection(_connectionString)){
            return db.Query<PostsFeed>(sp).ToList();
         }

@@ -7,6 +7,11 @@
   background: #b3afcc; 
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
+/* En tu hoja de estilo personalizada o en línea de estilo */
+.small-red-button {
+  font-size: 0.75rem;
+}
+
 .Titulo{
   padding-top: 15%;
   padding-bottom: 5%;

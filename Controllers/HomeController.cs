@@ -35,6 +35,7 @@ public class HomeController : Controller
     {
         ViewBag.Usuario = BD.GetUsuario(IdUsuario);
         ViewBag.Feeds = BD.ObtenerFeed();
+        
 
         return View("Home");
     }
