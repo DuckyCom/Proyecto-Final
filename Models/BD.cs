@@ -15,7 +15,7 @@ public class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sp = "Login-Usuario";
-            usuarios = db.QueryFirstOrDefault<Usuarios>(sp, new { sp_Nombre = nombreUsuario, sp_Contraseña = contraseña }, commandType: CommandType.StoredProcedure);
+            usuarios = db.QueryFirstOrDefault<Usuarios>(sp, new { @Nombre = nombreUsuario, @Contraseña = contraseña }, commandType: CommandType.StoredProcedure);
         }
 
         return usuarios;
@@ -24,8 +24,8 @@ public class BD
         public static Usuarios GetUsuario(int IdUsuario_){
         Usuarios Usuarios = null;
         using(SqlConnection db = new SqlConnection(_connectionString)){
-            string sp = "GetUsuario";
-            Usuarios = db.QueryFirstOrDefault<Usuarios>(sp, new{IdUsuario = IdUsuario_}, commandType: CommandType.StoredProcedure);
+            string sp = "Select Nombre from Usuarios where ID = @pIdUsuario";
+            Usuarios = db.QueryFirstOrDefault<Usuarios>(sp, new{pIdUsuario = IdUsuario_});
         }
         return Usuarios;
     }
@@ -35,7 +35,14 @@ public class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             string sp = "Registrar-Usuario";
-            db.Execute(sp, new { Nombre = usuario.NombreUsuario, Contraseña = usuario.Contraseña, Correo = usuario.Mail }, commandType: CommandType.StoredProcedure);
+            db.Execute(sp, new { @Nombre = usuario.Nombre, @Contraseña = usuario.Contrasenia, @Correo = usuario.Mail }, commandType: CommandType.StoredProcedure);
+        }
+    }
+    public  static List<PostsFeed> ObtenerFeed()
+    {
+        string sp = "Select * From PostsFeed";
+        using (SqlConnection db = new SqlConnection(_connectionString)){
+           return db.Query<PostsFeed>(sp).ToList();
         }
     }
 }

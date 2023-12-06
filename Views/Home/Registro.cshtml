@@ -15,7 +15,7 @@
     <body style="background-color: #130758;">
 <div class="bloques">
 <div class="bloque1">
-<form Action='@Url.Action("Registro","Home")'>
+<form method="post" Action='@Url.Action("Registro","Home")'>
     <div class="Titulo">
         Registro
     </div>
@@ -25,11 +25,11 @@
     </div>
     <div class="Usuario">
         <h2>Contraseña</h2>
-        <input type="password" class="inputlogin" name="Contraseña" required></input>
+        <input type="password" class="inputlogin" name="Contrasenia" required></input>
     </div>
     <div class="Usuario">
         <h2>Correo Electronico.</h2>
-        <input type="text" class="inputlogin" name="Codigo"  required></input>@* /* cambiar el name="codigo"*/ *@
+        <input type="text" class="inputlogin" name="Mail"  required></input>@* /* cambiar el name="codigo"*/ *@
     </div>
         <button class="inicio" type="submit">Registrarse</button>
 </form>

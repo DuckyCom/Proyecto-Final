@@ -1,1 +1,9 @@
-<h1>Home</h1>
+<h1>Bienvenido Usuario @ViewBag.Usuario.Nombre</h1>
+
+@foreach (PostsFeed postsFeed in ViewBag.Feeds)
+{
+    <h1>Usuario: @postsFeed.UsuarioID</h1>    
+    <img src="@postsFeed.Imagen" alt="">    
+    <h5> Descripcion: @postsFeed.Descripcion</h5>
+    <p>Likes: @postsFeed.ContadorLikes</p>    
+}

@@ -34,7 +34,15 @@ public class HomeController : Controller
         public IActionResult Home(int IdUsuario)
     {
         ViewBag.Usuario = BD.GetUsuario(IdUsuario);
+        ViewBag.Feeds = BD.ObtenerFeed();
 
-        return View();
+        return View("Home");
     }
+        public IActionResult Registro(Usuarios usuarios)
+    {
+        BD.RegistrarUsuario(usuarios);
+        return View("Index");
+    }
+
+    
 }   
