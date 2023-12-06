@@ -1,3 +1,3 @@
-﻿$(document).ready(function () {
-  $('#Modal').modal('hide');
-});
+﻿// $(document).ready(function () {
+//   $('#Modal').modal('hide');
+// });
