@@ -55,7 +55,10 @@ html {
 .Usuario{
   margin-bottom: 6%;
 }
-
+.container img{
+  width: 400px; !important
+  height: 300px; !important
+}
 .imagen-index{
   border-radius: 26px;
   width: 78%;

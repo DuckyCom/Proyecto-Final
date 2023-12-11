@@ -4,7 +4,7 @@
 
 
 <h1>Bienvenido Usuario @ViewBag.Usuario.Nombre</h1>
-
+<div class="container">
 @foreach (PostsFeed postsFeed in ViewBag.Feeds)
 {
 
@@ -14,11 +14,9 @@
     <p>Likes: @postsFeed.ContadorLikes</p>    
 }
 
-<div class="container">
-    <!-- Contenido de la página -->
+    <a href='@Url.Action("Index", "Home")' class="btn btn-danger">cerrar sesión</a>
+    <a href='@Url.Action("Profile", "Home", new { IdUsuario = ViewBag.Usuario.ID })' class="btn btn-primary">Perfil</a>
+    <a href='@Url.Action("CrearPubli", "Home", new { IdUsuario = ViewBag.Usuario.ID })' class="btn btn-primary">Crear Publicación</a>
 
-    <!-- Botón más pequeño y rojo con clase personalizada -->
-    <a href="@Url.Action("Index", "Home")" class="btn btn-danger">cerrar sesión</a>
-    <a href="@Url.Action("Profile", "Home")" class="btn btn-primary">Perfil</a>
 </div>
 

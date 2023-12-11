@@ -23,13 +23,14 @@ public class BD
 
         public static Usuarios GetUsuario(int IdUsuario_){
         Usuarios Usuarios = null;
-        using(SqlConnection db = new SqlConnection(_connectionString)){
-            string sp = "Select Nombre from Usuarios where ID = @pIdUsuario";
+            using(SqlConnection db = new SqlConnection(_connectionString)){
+            string sp = "Select Nombre, ID, Contraseña from Usuarios where ID = @pIdUsuario";
             Usuarios = db.QueryFirstOrDefault<Usuarios>(sp, new{pIdUsuario = IdUsuario_});
         }
         return Usuarios;
     }
 
+   
     public static void RegistrarUsuario(Usuarios usuario)
     {
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -45,4 +46,41 @@ public class BD
            return db.Query<PostsFeed>(sp).ToList();
         }
     }
+
+        public static void DeletePost(int id)
+    {
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            string sp = "EliminarFilaPorID";
+            db.Execute(sp, new { @ID = id }, commandType: CommandType.StoredProcedure);
+        }
+    }
+
+    public void InsertarPost(int usuarioID, string imagen, string descripcion)
+{
+    using (SqlConnection db = new SqlConnection(_connectionString))
+    {
+        db.Open();
+
+        string sp = "InsertarPost";
+
+        // Utiliza Dapper para llamar al SP
+        db.Execute(sp, new { UsuarioID = usuarioID, Imagen = imagen, Descripcion = descripcion }, commandType: CommandType.StoredProcedure);
+    }
+}
+
+
+
+//     public static List<Favorito> GuardarFavoritos(int idUsuario, int idpublicacion)
+// {
+//     List<Favorito> guardarFav = null;
+//     using (SqlConnection DB = new SqlConnection(_connectionString))
+//     {
+//         string SP = "GuardarFavoritos";
+//         guardarFav = DB.Query<Favorito>(SP, new { IdUser = idUsu, IdCasa = idCasa },
+//             commandType: CommandType.StoredProcedure).ToList();
+//     }
+//     return guardarFav;
+// }
+
 }
