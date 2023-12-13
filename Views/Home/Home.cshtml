@@ -11,8 +11,12 @@
     <h1>Usuario: @postsFeed.Nombre</h1>    
     <img src="@postsFeed.Imagen" alt="">    
     <h5> Descripcion: @postsFeed.Descripcion</h5>
-    <p>Likes: @postsFeed.ContadorLikes</p>    
+    <p>Likes: @postsFeed.ContadorLikes</p> 
+    <div class="corazon" id="@postsFeed.ID" onclick="corazonClick(@postsFeed.ID)">
+    <h5>&#9825;</h5>
+    </div>
 }
+
 
     <a href='@Url.Action("Index", "Home")' class="btn btn-danger">cerrar sesión</a>
     <a href='@Url.Action("Profile", "Home", new { IdUsuario = ViewBag.Usuario.ID })' class="btn btn-primary">Perfil</a>

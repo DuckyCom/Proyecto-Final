@@ -77,5 +77,9 @@ public class HomeController : Controller
         BD.InsertarPost(IdUsuario, imagen, descripcion);
         return RedirectToAction("Profile", new{IdUsuario});
     }
-
+    public PostsFeed ToggleFavorito(int idPubli)
+{
+    ViewBag.qsy = BD.GuardarFavoritos(idPubli);
+    return BD.UpdateLike(ViewBag.qsy.ContadorLikes);
+}
 }   

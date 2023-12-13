@@ -55,18 +55,45 @@ public class BD
     }
 }
 
+public static bool EsFavorito(int idUsuario, int idCasa)
+{
+    using (SqlConnection DB = new SqlConnection(_connectionString))
+    {
+        string SP = "EsFavorito";
+        bool result = DB.QueryFirstOrDefault<bool>(SP, new {IDUsuario = idUsuario, IdCasa = idCasa}, commandType: CommandType.StoredProcedure);
 
+        return result;
+    }
+}
 
-//     public static List<Favorito> GuardarFavoritos(int idUsuario, int idpublicacion)
-// {
-//     List<Favorito> guardarFav = null;
-//     using (SqlConnection DB = new SqlConnection(_connectionString))
-//     {
-//         string SP = "GuardarFavoritos";
-//         guardarFav = DB.Query<Favorito>(SP, new { IdUser = idUsu, IdCasa = idCasa },
-//             commandType: CommandType.StoredProcedure).ToList();
-//     }
-//     return guardarFav;
-// }
+public static void SacarDeFavoritos(int idUsu, int idCasa)
+{
+    using (SqlConnection DB = new SqlConnection(_connectionString))
+    {
+        string SP = "SacarDeFavoritos";
+        DB.Execute(SP, new { IdUser = idUsu, IdCasa = idCasa }, commandType: CommandType.StoredProcedure);
+    }
+}
+public static PostsFeed GuardarFavoritos(int idPubli)
+{
+    PostsFeed guardarFav = new PostsFeed();
+    using (SqlConnection DB = new SqlConnection(_connectionString))
+    {
+        string SP = "select * From PostsFeed Where ID = @pidPubli";
+        
+        guardarFav = DB.QueryFirstOrDefault<PostsFeed>(SP, new { pidPubli = idPubli});
+    }
+    return guardarFav;
+}
+public static void UpdateLike(int CL)
+{
+    PostsFeed guardarFav = new PostsFeed();
+    using (SqlConnection DB = new SqlConnection(_connectionString))
+    {
+        string SP2 = "Update PostsFeed set ContadorLikes = @pcl";
+        
+        DB.Execute(SP2, new { pcl = CL+1});
+    }
+}
 
 }
