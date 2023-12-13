@@ -42,7 +42,7 @@ public class HomeController : Controller
 
     public IActionResult DeletePost(int IDPost, int IdUsuario)
     {
-        Console.WriteLine(IdUsuario); //aca ya el IdUsuario es 0
+        Console.WriteLine(IdUsuario);
         BD.DeletePost(IDPost);
 
         return RedirectToAction("Profile", new{IdUsuario});
@@ -50,10 +50,8 @@ public class HomeController : Controller
 
         public IActionResult Profile(int IdUsuario)
     {
-        Console.WriteLine("Mucho antes de profile " + IdUsuario);//verificador de si llega 0 (lo hace por el action CrearPublicacion)
         ViewBag.Feeds = BD.ObtenerFeed();
         ViewBag.Usuario = BD.usuarios;
-        Console.WriteLine("Antes de profile " + IdUsuario);//verificador de si llega 0 (lo hace por el action CrearPublicacion)
         return View("Profile");
     }
 
@@ -77,9 +75,16 @@ public class HomeController : Controller
         BD.InsertarPost(IdUsuario, imagen, descripcion);
         return RedirectToAction("Profile", new{IdUsuario});
     }
-    public PostsFeed ToggleFavorito(int idPubli)
+
+     [HttpPost]
+public ActionResult ToggleFavorito(int idPubli)
 {
-    ViewBag.qsy = BD.GuardarFavoritos(idPubli);
-    return BD.UpdateLike(ViewBag.qsy.ContadorLikes);
+    bool si = true; // Cambiar a una variable basada en la acción del usuario
+    int contadorLikesActualizado = BD.UpdateLike(idPubli, si);
+
+    var result = new JsonResult(new { ContadorLikes = contadorLikesActualizado });
+    return result;
 }
+
+ 
 }   

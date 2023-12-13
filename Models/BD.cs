@@ -6,7 +6,7 @@ namespace TPFinal.Models;
 
 public class BD
 {
-    private static string _connectionString = @"Server=DESKTOP-E3OHN6P\SQLEXPRESS01;DataBase=DBPetNex;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=localhost;DataBase=DBPetNex;Trusted_Connection=True;";
     public static Usuarios usuarios = null;
     public static Usuarios LoginUsuario(string nombreUsuario, string contraseña)
     {
@@ -37,6 +37,16 @@ public class BD
         }
     }
 
+    //     public static List<PostsFeed> ObtenerPostPerfil()
+    // {
+    //     string sp = "select P.ID, P.UsuarioID, P.Imagen, P.Descripcion, P.ContadorLikes, U.Nombre from PostsFeed P inner join Usuarios U ON P.UsuarioID = U.ID where UsuarioID =;
+    //     using (SqlConnection db = new SqlConnection(_connectionString)){
+    //        return db.Query<PostsFeed>(sp).ToList();
+    //     }
+    // }
+
+
+
         public static void DeletePost(int id)
     {
         using (SqlConnection db = new SqlConnection(_connectionString))
@@ -50,50 +60,34 @@ public class BD
 {
     using (SqlConnection db = new SqlConnection(_connectionString))
     {
-            string sp = "Insert Into PostsFeed (UsuarioID,Imagen,Descripcion) Values (@pusuario,@pimagen,@pdescripcion)";
-            db.Execute(sp, new { pusuario = usuarioID,pimagen = imagen, pdescripcion = descripcion});
+            string sp = "Insert Into PostsFeed (UsuarioID,Imagen,Descripcion,ContadorLikes) Values (@pusuario,@pimagen,@pdescripcion, @pcontadorlikes)";
+            db.Execute(sp, new { pusuario = usuarioID,pimagen = imagen, pdescripcion = descripcion, pcontadorlikes = 0}); //0 porque no usamos bots
     }
 }
 
-public static bool EsFavorito(int idUsuario, int idCasa)
-{
-    using (SqlConnection DB = new SqlConnection(_connectionString))
-    {
-        string SP = "EsFavorito";
-        bool result = DB.QueryFirstOrDefault<bool>(SP, new {IDUsuario = idUsuario, IdCasa = idCasa}, commandType: CommandType.StoredProcedure);
 
-        return result;
-    }
-}
+public static int UpdateLike(int idPubli, bool PorSiOPorNo)
+{
+    int contadorActualizado;
 
-public static void SacarDeFavoritos(int idUsu, int idCasa)
-{
-    using (SqlConnection DB = new SqlConnection(_connectionString))
+    if (PorSiOPorNo)
     {
-        string SP = "SacarDeFavoritos";
-        DB.Execute(SP, new { IdUser = idUsu, IdCasa = idCasa }, commandType: CommandType.StoredProcedure);
+        using (SqlConnection DB = new SqlConnection(_connectionString))
+        {
+            string sp = "Update PostsFeed set ContadorLikes = ContadorLikes + 1 output INSERTED.ContadorLikes where ID = @pidPubli";
+            contadorActualizado = DB.ExecuteScalar<int>(sp, new { pidPubli = idPubli });
+        }
     }
-}
-public static PostsFeed GuardarFavoritos(int idPubli)
-{
-    PostsFeed guardarFav = new PostsFeed();
-    using (SqlConnection DB = new SqlConnection(_connectionString))
+    else
     {
-        string SP = "select * From PostsFeed Where ID = @pidPubli";
-        
-        guardarFav = DB.QueryFirstOrDefault<PostsFeed>(SP, new { pidPubli = idPubli});
+        using (SqlConnection DB = new SqlConnection(_connectionString))
+        {
+            string sp = "Update PostsFeed set ContadorLikes = ContadorLikes - 1 output INSERTED.ContadorLikes where ID = @pidPubli";
+            contadorActualizado = DB.ExecuteScalar<int>(sp, new { pidPubli = idPubli });
+        }
     }
-    return guardarFav;
-}
-public static void UpdateLike(int CL)
-{
-    PostsFeed guardarFav = new PostsFeed();
-    using (SqlConnection DB = new SqlConnection(_connectionString))
-    {
-        string SP2 = "Update PostsFeed set ContadorLikes = @pcl";
-        
-        DB.Execute(SP2, new { pcl = CL+1});
-    }
+
+    return contadorActualizado;
 }
 
 }

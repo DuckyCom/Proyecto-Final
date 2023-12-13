@@ -1,20 +1,31 @@
-﻿
-function corazonClick(id) {
-
+﻿function corazonClick(id, contadorDeLikes) {
     $.ajax({
         type: 'POST',
         url: '/Home/ToggleFavorito',
-        data: { idPubli : id},
-        dataType: 'JSON',
+        data: { idPubli: id },
+        dataType: 'json',
         success: function (response) {
-
-            let element = document.getElementById(id);
-            if(element.innerHTML = "<h5>&#9825;</h5>")
-            {
-                element.innerHTML = "<h5>&#x1F497;</h5>"
+            if (response && response.ContadorLikes !== undefined) {
+                let updatedLikes = response.ContadorLikes;
+                let element = document.getElementById(id);
+        
+                if (element !== null) {
+                    let contadorElement = element.closest('div').querySelector('p');
+                    contadorElement.innerHTML = "Likes: " + updatedLikes;
+        
+                    if (element.innerHTML === "<h5>&#9825;</h5>") {
+                        element.innerHTML = "<h5>&#9829;</h5>";
+                    } else {
+                        element.innerHTML = "<h5>&#9825;</h5>";
+                    }
+                } else {
+                    console.error('Elemento no encontrado con el ID:', id);
+                }
+            } else {
+                console.error('Respuesta de servidor no válida:', response);
             }
-
         }
+        
     });
-            
 }
+

@@ -6,7 +6,8 @@
 
 @*este foreach tiene que ser una consulta SQL donde ya me mande todos los que son de su mismo ID*@
 @*tambien, no tiene que ser un form al ir a la accion "DeletePost"*@
-
+<div class="container">
+<h1>Usuario: @ViewBag.Usuario.Nombre</h1>
 @foreach (PostsFeed postsUser in ViewBag.Feeds)
 {
     // Verifica si el ID del usuario cumple con cierto criterio
@@ -23,6 +24,7 @@
         </form>
     }
 }
+</div>
 
 
     <a href='@Url.Action("Index", "Home")' class="btn btn-danger">cerrar sesión</a>
