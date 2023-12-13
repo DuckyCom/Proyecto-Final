@@ -52,28 +52,28 @@ public class HomeController : Controller
     {
         Console.WriteLine("Mucho antes de profile " + IdUsuario);//verificador de si llega 0 (lo hace por el action CrearPublicacion)
         ViewBag.Feeds = BD.ObtenerFeed();
-        ViewBag.Usuario = BD.GetUsuario(IdUsuario);
-        Console.WriteLine("Antes de profile " + ViewBag.Usuario.ID);//verificador de si llega 0 (lo hace por el action CrearPublicacion)
+        ViewBag.Usuario = BD.usuarios;
+        Console.WriteLine("Antes de profile " + IdUsuario);//verificador de si llega 0 (lo hace por el action CrearPublicacion)
         return View("Profile");
     }
 
      public IActionResult Home(int IdUsuario)
     {
         ViewBag.Feeds = BD.ObtenerFeed();
-        ViewBag.Usuario = BD.GetUsuario(IdUsuario);
+        ViewBag.Usuario = BD.usuarios;
         return View("Home");
     }
 
       public IActionResult CrearPubli(int IdUsuario)
     {
-        ViewBag.Usuario = BD.GetUsuario(IdUsuario);
+        ViewBag.Usuario = BD.usuarios;
         return View("CrearPubli");
     }
 
         [HttpPost]
-    public IActionResult CrearPublicacion(string imagen, string descripcion, int IdUsuario)
+    public IActionResult GuardarPublicacion(int IdUsuario, string imagen, string descripcion)
     {
-        Console.WriteLine("Crear Publicacion " + IdUsuario); //PORQUE ACA LE LLEGA 0000000000000000000
+        
         BD.InsertarPost(IdUsuario, imagen, descripcion);
         return RedirectToAction("Profile", new{IdUsuario});
     }

@@ -6,11 +6,10 @@ namespace TPFinal.Models;
 
 public class BD
 {
-    private static string _connectionString = @"Server=localhost;DataBase=DBPetNex;Trusted_Connection=True;";
-
+    private static string _connectionString = @"Server=DESKTOP-E3OHN6P\SQLEXPRESS01;DataBase=DBPetNex;Trusted_Connection=True;";
+    public static Usuarios usuarios = null;
     public static Usuarios LoginUsuario(string nombreUsuario, string contraseña)
     {
-        Usuarios usuarios = null;
 
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
@@ -19,15 +18,6 @@ public class BD
         }
 
         return usuarios;
-    }
-
-        public static Usuarios GetUsuario(int IdUsuario_){
-        Usuarios Usuarios = null;
-            using(SqlConnection db = new SqlConnection(_connectionString)){
-            string sp = "Select Nombre, ID, Contraseña from Usuarios where ID = @pIdUsuario";
-            Usuarios = db.QueryFirstOrDefault<Usuarios>(sp, new{pIdUsuario = IdUsuario_});
-        }
-        return Usuarios;
     }
 
    
@@ -51,21 +41,17 @@ public class BD
     {
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            string sp = "EliminarFilaPorID";
-            db.Execute(sp, new { @ID = id }, commandType: CommandType.StoredProcedure);
+            string sp = "Delete from PostsFeed Where ID = @deletepostID";
+            db.Execute(sp, new { deletepostID = id });
         }
     }
 
-    public void InsertarPost(int usuarioID, string imagen, string descripcion)
+    public static void InsertarPost(int usuarioID, string imagen, string descripcion)
 {
     using (SqlConnection db = new SqlConnection(_connectionString))
     {
-        db.Open();
-
-        string sp = "InsertarPost";
-
-        // Utiliza Dapper para llamar al SP
-        db.Execute(sp, new { UsuarioID = usuarioID, Imagen = imagen, Descripcion = descripcion }, commandType: CommandType.StoredProcedure);
+            string sp = "Insert Into PostsFeed (UsuarioID,Imagen,Descripcion) Values (@pusuario,@pimagen,@pdescripcion)";
+            db.Execute(sp, new { pusuario = usuarioID,pimagen = imagen, pdescripcion = descripcion});
     }
 }
 
