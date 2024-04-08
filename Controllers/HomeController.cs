@@ -61,6 +61,16 @@ public class HomeController : Controller
         ViewBag.Usuario = BD.usuarios;
         return View("Home");
     }
+    public IActionResult PublicacionesSeguidores(int IdUsuario)
+{
+    // CREAR ESTO EN LA BASE DE DATOS
+    // var publicacionesSeguidores = BD.ObtenerPublicacionesSeguidores(IdUsuario);
+    // ViewBag.PublicacionesSeguidores = publicacionesSeguidores;
+    // ViewBag.Usuario = BD.ObtenerUsuarioPorId(IdUsuario);
+
+    return View("PublicacionesSeguidores");
+}
+
 
       public IActionResult CrearPubli(int IdUsuario)
     {
