@@ -12,6 +12,13 @@
   font-size: 0.75rem;
 }
 
+/* styles.css */
+
+.card-body {
+  max-width: 90% !important; /* Adjust this value as needed */
+  margin: 0 auto !important;
+}
+
 .Titulo{
   padding-top: 15%;
   padding-bottom: 5%;
@@ -56,8 +63,8 @@ html {
   margin-bottom: 6%;
 }
 .container img{
-  width: 400px; !important
-  height: 300px; !important
+  width: 400px; /*!important*/
+  height: 300px; /*!important*/
 }
 .imagen-index{
   border-radius: 26px;
@@ -103,4 +110,43 @@ html {
   margin-left: 32%;
   margin-top: 50%;
   text-decoration: none;
+}
+
+
+/* Feed */
+.feed {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.post {
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.post-header {
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.post-body {
+  padding: 10px;
+}
+
+.post-footer {
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.like-button {
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.buttons {
+  margin-top: 20px;
 }
