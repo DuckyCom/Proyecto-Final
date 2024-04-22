@@ -90,4 +90,28 @@ public static int UpdateLike(int idPubli, bool PorSiOPorNo)
     return contadorActualizado;
 }
 
+
+public static List<PostsFeed> ObtenerPublicacionesSeguidos(int usuarioId)
+{
+    using (SqlConnection db = new SqlConnection(_connectionString))
+    {
+        string sp = "ObtenerPublicacionesSeguidos";
+        return db.Query<PostsFeed>(sp, new { UsuarioID = usuarioId }, commandType: CommandType.StoredProcedure).ToList();
+    }
 }
+
+public static List<Usuarios> ObtenerSeguidores(int usuarioId)
+{
+    using (SqlConnection db = new SqlConnection(_connectionString))
+    {
+        string sp = "ObtenerSeguidores";
+        return db.Query<Usuarios>(sp, new { UsuarioID = usuarioId }, commandType: CommandType.StoredProcedure).ToList();
+    }
+}
+
+
+}
+
+
+
+
