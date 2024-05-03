@@ -61,23 +61,25 @@ public class HomeController : Controller
         ViewBag.Usuario = BD.usuarios;
         return View("Home");
     }
-    //hay que solucionar esto
-    // public IActionResult PublicacionesSeguidores(int IdUsuario)
-    // {
-    //      ViewBag.PostsSeg publicacionesSeguidores = BD.ObtenerPublicacionesSeguidos(IdUsuario);
-    //     return View("PublicacionesSeguidores", publicacionesSeguidores);
-    // }
+    public IActionResult PublicacionesSeguidores(int IdUsuario)
+{
+    var usuario = BD.ObtenerUsuarioPorId(IdUsuario);
+    ViewBag.Usuario = usuario;
 
+    var publicacionesSeguidores = BD.ObtenerPublicacionesSeguidos(IdUsuario);
 
-
-
-
-
-      public IActionResult CrearPubli(int IdUsuario)
+    if (publicacionesSeguidores != null)
     {
-        ViewBag.Usuario = BD.usuarios;
-        return View("CrearPubli");
+        ViewBag.PublicacionesSeguidos = publicacionesSeguidores;
     }
+    else
+    {
+        ViewBag.PublicacionesSeguidos = new List<PostsFeed>(); // Crear una lista vacía si no hay publicaciones
+    }
+
+    return View("PublicacionesSeguidores");
+}
+
 
         [HttpPost]
     public IActionResult GuardarPublicacion(int IdUsuario, string imagen, string descripcion)
@@ -97,5 +99,4 @@ public ActionResult ToggleFavorito(int idPubli)
     return result;
 }
 
- 
 }   

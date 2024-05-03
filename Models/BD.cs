@@ -96,7 +96,9 @@ public static List<PostsFeed> ObtenerPublicacionesSeguidos(int usuarioId)
     using (SqlConnection db = new SqlConnection(_connectionString))
     {
         string sp = "ObtenerPublicacionesSeguidos";
-        return db.Query<PostsFeed>(sp, new { UsuarioID = usuarioId }, commandType: CommandType.StoredProcedure).ToList();
+        var parameters = new DynamicParameters();
+        parameters.Add("@UsuarioID", usuarioId);
+        return db.Query<PostsFeed>(sp, parameters, commandType: CommandType.StoredProcedure).ToList();
     }
 }
 
@@ -105,10 +107,22 @@ public static List<Usuarios> ObtenerSeguidores(int usuarioId)
     using (SqlConnection db = new SqlConnection(_connectionString))
     {
         string sp = "ObtenerSeguidores";
-        return db.Query<Usuarios>(sp, new { UsuarioID = usuarioId }, commandType: CommandType.StoredProcedure).ToList();
+        var parameters = new DynamicParameters();
+        parameters.Add("@UsuarioID", usuarioId);
+        return db.Query<Usuarios>(sp, parameters, commandType: CommandType.StoredProcedure).ToList();
     }
 }
 
+public static Usuarios ObtenerUsuarioPorId(int usuarioId)
+{
+    using (SqlConnection db = new SqlConnection(_connectionString))
+    {
+        string sp = "ObtenerUsuarioPorId";
+        var parameters = new DynamicParameters();
+        parameters.Add("@UsuarioID", usuarioId);
+        return db.QueryFirstOrDefault<Usuarios>(sp, parameters, commandType: CommandType.StoredProcedure);
+    }
+}
 
 }
 
