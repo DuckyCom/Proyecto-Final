@@ -39,7 +39,6 @@ public class HomeController : Controller
         return View("Index");
     }
 
-
     public IActionResult DeletePost(int IDPost, int IdUsuario)
     {
         Console.WriteLine(IdUsuario);
@@ -62,25 +61,16 @@ public class HomeController : Controller
         return View("Home");
     }
     public IActionResult PublicacionesSeguidores(int IdUsuario)
-{
-    var usuario = BD.ObtenerUsuarioPorId(IdUsuario);
-    ViewBag.Usuario = usuario;
-
-    var publicacionesSeguidores = BD.ObtenerPublicacionesSeguidos(IdUsuario);
-
-    if (publicacionesSeguidores != null)
     {
-        ViewBag.PublicacionesSeguidos = publicacionesSeguidores;
+        ViewBag.Feeds = BD.ObtenerFeedSeguidores(IdUsuario);
+        ViewBag.Usuario = BD.usuarios;
+        return View("PublicacionesSeguidores");
     }
-    else
+        public IActionResult CrearPubli(int IdUsuario)
     {
-        ViewBag.PublicacionesSeguidos = new List<PostsFeed>(); // Crear una lista vacía si no hay publicaciones
+        ViewBag.Usuario = BD.usuarios;
+        return View("CrearPubli");
     }
-
-    return View("PublicacionesSeguidores");
-}
-
-
         [HttpPost]
     public IActionResult GuardarPublicacion(int IdUsuario, string imagen, string descripcion)
     {

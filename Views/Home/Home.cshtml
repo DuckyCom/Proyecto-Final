@@ -24,11 +24,11 @@
         <a href='@Url.Action("Index", "Home")' class="btn btn-danger">Cerrar sesión</a>
         <a href='@Url.Action("Profile", "Home", new { IdUsuario = ViewBag.Usuario.ID })' class="btn btn-primary">Perfil</a>
         <a href='@Url.Action("CrearPubli", "Home", new { IdUsuario = ViewBag.Usuario.ID })' class="btn btn-primary">Crear Publicación</a>
-        
+        <a href='@Url.Action("PublicacionesSeguidores", "Home", new { IdUsuario = ViewBag.Usuario.ID })' class="btn btn-primary">Publicaciones de Seguidores</a>
     </div>
 
-    <a href='@Url.Action("PublicacionesSeguidores", "Home")' class="btn btn-primary mt-4">Publicaciones de Seguidores</a>
-
+    
+    
 </div>
 
 </body>

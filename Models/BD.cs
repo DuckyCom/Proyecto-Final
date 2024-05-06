@@ -37,13 +37,6 @@ public class BD
         }
     }
 
-    //     public static List<PostsFeed> ObtenerPostPerfil()
-    // {
-    //     string sp = "select P.ID, P.UsuarioID, P.Imagen, P.Descripcion, P.ContadorLikes, U.Nombre from PostsFeed P inner join Usuarios U ON P.UsuarioID = U.ID where UsuarioID =;
-    //     using (SqlConnection db = new SqlConnection(_connectionString)){
-    //        return db.Query<PostsFeed>(sp).ToList();
-    //     }
-    // }
 
 
 
@@ -90,39 +83,23 @@ public static int UpdateLike(int idPubli, bool PorSiOPorNo)
     return contadorActualizado;
 }
 
-
-public static List<PostsFeed> ObtenerPublicacionesSeguidos(int usuarioId)
-{
+public static List<PostsSeguidores> ObtenerFeedSeguidores(int IdUsuario)
+{   
+    string sp = @"
+        SELECT PF.ID, PF.UsuarioID, PF.Imagen, PF.Descripcion, PF.ContadorLikes, U.Nombre 
+        FROM [dbo].[PostsFeed] PF 
+        INNER JOIN [dbo].[Usuarios] U ON PF.UsuarioID = U.ID 
+        INNER JOIN [dbo].[Seguidores] S ON PF.UsuarioID = S.UsuarioID
+        WHERE S.SeguidorID = @pIdUsuario;";
+    
     using (SqlConnection db = new SqlConnection(_connectionString))
     {
-        string sp = "ObtenerPublicacionesSeguidos";
-        var parameters = new DynamicParameters();
-        parameters.Add("@UsuarioID", usuarioId);
-        return db.Query<PostsFeed>(sp, parameters, commandType: CommandType.StoredProcedure).ToList();
+        return db.Query<PostsSeguidores>(sp, new { pIdUsuario = IdUsuario }).ToList();
     }
 }
 
-public static List<Usuarios> ObtenerSeguidores(int usuarioId)
-{
-    using (SqlConnection db = new SqlConnection(_connectionString))
-    {
-        string sp = "ObtenerSeguidores";
-        var parameters = new DynamicParameters();
-        parameters.Add("@UsuarioID", usuarioId);
-        return db.Query<Usuarios>(sp, parameters, commandType: CommandType.StoredProcedure).ToList();
-    }
-}
 
-public static Usuarios ObtenerUsuarioPorId(int usuarioId)
-{
-    using (SqlConnection db = new SqlConnection(_connectionString))
-    {
-        string sp = "ObtenerUsuarioPorId";
-        var parameters = new DynamicParameters();
-        parameters.Add("@UsuarioID", usuarioId);
-        return db.QueryFirstOrDefault<Usuarios>(sp, parameters, commandType: CommandType.StoredProcedure);
-    }
-}
+
 
 }
 
